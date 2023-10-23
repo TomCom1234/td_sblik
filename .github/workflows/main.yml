@@ -26,8 +26,8 @@ jobs:
         uses: actions/checkout@v3
 
 
-      # Deploy files to server via FTP
-      - name: Deploy changes via ftp
+      # Deploy PLUGIN files to server via FTP
+      - name: Deploy plugin changes via ftp
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.sblik.com
@@ -35,5 +35,17 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}         
           server-dir: /wp-content/plugins/bs-divorce-site/
           local-dir: /src_plugin/
+          exclude: |
+            **/exclude/**
+            
+      # Deploy PDF TEMPLATE files to server via FTP
+      - name: Deploy PDF template changes via ftp
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.sblik.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}         
+          server-dir: /wp-content/uploads/PDF_EXTENDED_TEMPLATES/
+          local-dir: /src_uploads/
           exclude: |
             **/exclude/**
