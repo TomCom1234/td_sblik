@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}         
           server-dir: /wp-content/plugins/bs-divorce-site/
-          local-dir: /src_plugin/
+          local-dir: ./src_plugin/
           exclude: |
             **/exclude/**
             
@@ -46,6 +46,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}         
           server-dir: /wp-content/uploads/PDF_EXTENDED_TEMPLATES/
-          local-dir: /src_uploads/
+          local-dir: ./src_uploads/
           exclude: |
             **/exclude/**
