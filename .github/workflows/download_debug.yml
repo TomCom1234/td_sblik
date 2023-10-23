@@ -23,11 +23,21 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - name: Checkout latest changes
               uses: actions/checkout@v3
-              
-            - name: restore timestamps
-              uses: chetan/git-restore-mtime-action@v2
 
-            - name: Install lftp
-              run: sudo apt install lftp
-            - name: download debug
-              run: lftp -c "set ssl:verify-certificate false; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.sblik.com; mirror -n -v /wp-content/debug_log debug"
+            - name: Deploy files via SFTP
+              uses: pressidium/lftp-mirror-action@v1
+              with:
+                    # SFTP credentials
+                    host: ftp.sblik.com
+                    port: 21
+                    user: ${{ secrets.FTP_USERNAME }}
+                    pass: ${{ secrets.FTP_PASSWORD }}         
+                              # lftp settings
+                    onlyNewer: true
+                    settings: 'sftp:auto-confirm=yes'
+                    # Mirror command options
+                    localDir: './debug'
+                    remoteDir: '/wp-content/debug_logs/'
+                    reverse: true
+                    ignoreFile: '.lftp_ignore'
+                    options: '--verbose'
