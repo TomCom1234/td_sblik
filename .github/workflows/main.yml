@@ -49,6 +49,7 @@ jobs:
           local-dir: ./src_uploads/
           exclude: |
             **/exclude/*
-            
+      - name: Install lftp
+        run: sudo apt install lftp
       - name: download debug
         run: lftp -c "set ssl:verify-certificate false; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.sblik.com; mirror -n -v /wp-content/debug.log debug"
