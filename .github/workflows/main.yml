@@ -48,4 +48,4 @@ jobs:
           server-dir: /wp-content/uploads/PDF_EXTENDED_TEMPLATES/
           local-dir: ./src_uploads/
           exclude: |
-            **/exclude/**
+            **/exclude/*
