@@ -37,7 +37,7 @@ jobs:
                     settings: 'sftp:auto-confirm=yes'
                     # Mirror command options
                     localDir: './debug'
-                    remoteDir: '/wp-content/debug_logs/'
+                    remoteDir: '/wp-content/debug_log/'
                     reverse: true
                     ignoreFile: '.lftp_ignore'
                     options: '--verbose'
