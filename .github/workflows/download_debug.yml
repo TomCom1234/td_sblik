@@ -38,6 +38,6 @@ jobs:
                     # Mirror command options
                     localDir: './debug'
                     remoteDir: '/wp-content/debug_log/'
-                    reverse: true
+                    reverse: false
                     ignoreFile: '.lftp_ignore'
                     options: '--verbose'
