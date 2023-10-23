@@ -24,22 +24,13 @@ jobs:
             - name: Checkout latest changes
               uses: actions/checkout@v3
 
-            - name: Install lftp
-              run: sudo apt install lftp
-            - name: Deploy files via SFTP
-              uses: pressidium/lftp-mirror-action@v1
+            # Here is the deployment action
+            - name: Upload from output to a remote server via FTP
+              uses: modern-dev/ftp-mirror@v2
               with:
-                    # SFTP credentials
-                    host: ftp.sblik.com
-                    port: 21
-                    user: ${{ secrets.FTP_USERNAME }}
-                    pass: ${{ secrets.FTP_PASSWORD }}         
-                              # lftp settings
-                    onlyNewer: true
-                    settings: 'sftp:auto-confirm=yes'
-                    # Mirror command options
-                    localDir: './debug'
-                    remoteDir: '/wp-content/debug_log/'
-                    reverse: false
-                    ignoreFile: '.lftp_ignore'
-                    options: '--verbose'
+                server: ftp.sblik.com
+                user: ${{ secrets.FTP_USERNAME }}
+                password: ${{ secrets.FTP_PASSWORD }}
+                local_dir: "./debug"
+                remote_dir: "./wp-content/debug_logs"
+                delete: "false"
