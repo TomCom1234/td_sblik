@@ -23,7 +23,9 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - name: Checkout latest changes
               uses: actions/checkout@v3
+              
             - name: Install lftp
               run: sudo apt install lftp
+              
             - name: download userfiles
               run: lftp -c "set ssl:verify-certificate false; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.sblik.com; mirror -n -v wp-content/debug_log debug"
