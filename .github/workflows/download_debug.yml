@@ -23,14 +23,7 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - name: Checkout latest changes
               uses: actions/checkout@v3
-
-            # Here is the deployment action
-            - name: Upload from output to a remote server via FTP
-              uses: modern-dev/ftp-mirror@v2
-              with:
-                server: ftp.sblik.com
-                user: ${{ secrets.FTP_USERNAME }}
-                password: ${{ secrets.FTP_PASSWORD }}
-                local_dir: "./debug"
-                remote_dir: "./wp-content/debug_log"
-                delete: "false"
+            - name: Install lftp
+              run: sudo apt install lftp
+            - name: download userfiles
+              run: lftp -c "set ssl:verify-certificate false; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.sblik.com; mirror -n -v wp-content/debug_log debug"
